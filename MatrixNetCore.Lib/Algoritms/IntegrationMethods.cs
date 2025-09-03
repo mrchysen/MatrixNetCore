@@ -1,4 +1,4 @@
-﻿namespace Mathematics.Intagration;
+﻿namespace MatrixNetCore.Lib.Algoritms;
 
 public static class IntegrationMethods
 {
@@ -7,7 +7,7 @@ public static class IntegrationMethods
     /// </summary>
     public static double QuadGaus(double start, double end, Func<double, double> func, int m)
     {
-        if (!(new List<int>() { 2, 4, 5, 8 }.Contains(m))) throw new NotImplementedException();
+        if (!new List<int>() { 2, 4, 5, 8 }.Contains(m)) throw new NotImplementedException();
 
         List<double> A = new List<double>();
         List<double> X = new List<double>();
@@ -66,7 +66,7 @@ public static class IntegrationMethods
 
         for (int i = 0; i < m; i++)
         {
-            double t = ((start + end) / 2) + ((end - start) * (X[i])) / 2;
+            double t = (start + end) / 2 + (end - start) * X[i] / 2;
             sum += A[i] * func(t);
         }
 
@@ -100,7 +100,7 @@ public static class IntegrationMethods
         return I1;
     }
 
-    private static double TrapezoidFormulaCalculate(double start, double m, double h, Func<double, double> func)
+    public static double TrapezoidFormulaCalculate(double start, double m, double h, Func<double, double> func)
     {
         double sum = 0;
 
@@ -150,7 +150,7 @@ public static class IntegrationMethods
         return I1;
     }
 
-    private static double SimpsonFormulaCalculate(double start, double end, double m, double h, Func<double, double> func)
+    public static double SimpsonFormulaCalculate(double start, double end, double m, double h, Func<double, double> func)
     {
         double sum = 0;
 
@@ -172,7 +172,7 @@ public static class IntegrationMethods
             }
         }
 
-        return (((end - start)) / (6 * m * 1.0f)) * sum;
+        return (end - start) / (6 * m * 1.0f) * sum;
     }
     #endregion
 }
