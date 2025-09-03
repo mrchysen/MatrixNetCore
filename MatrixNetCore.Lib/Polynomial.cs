@@ -1,8 +1,10 @@
 ﻿using System.Text;
 
-namespace Mathematics.Polynomials;
+namespace MatrixNetCore.Lib;
 
-
+/// <summary>
+/// Полином
+/// </summary>
 public class Polynomial
 {
     // Поля \\
@@ -39,7 +41,7 @@ public class Polynomial
     }
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
 
         for (int i = Coefficients.Length - 1; i >= 0; i--)
         {
@@ -83,7 +85,7 @@ public class Polynomial
         int maxDegree = Math.Max(poly1.Degree, poly2.Degree);
         int minDegree = Math.Min(poly1.Degree, poly2.Degree);
 
-        Polynomial result = new Polynomial(maxDegree + 1);
+        var result = new Polynomial(maxDegree + 1);
 
         for (int i = 0; i <= maxDegree; i++)
         {
@@ -103,7 +105,7 @@ public class Polynomial
 
     public static Polynomial operator *(double alpha, Polynomial poly) 
     {
-        Polynomial result = new Polynomial(poly.Degree + 1);
+        var result = new Polynomial(poly.Degree + 1);
 
         for (int i = 0; i <= poly.Degree; i++)
         {
@@ -113,19 +115,13 @@ public class Polynomial
         return result;
     }
 
-    public static Polynomial operator *(Polynomial poly, double alpha)
-    {
-        return alpha * poly;
-    }
+    public static Polynomial operator *(Polynomial poly, double alpha) => alpha * poly;
 
-    public static Polynomial operator -(Polynomial poly1, Polynomial poly2) 
-    { 
-        return poly1 + (-1) * poly2;
-    }
+    public static Polynomial operator -(Polynomial poly1, Polynomial poly2) => poly1 + -1 * poly2;
 
     public static Polynomial operator *(Polynomial poly1, Polynomial poly2)
     {
-        Polynomial result = new Polynomial(poly1.Degree + poly2.Degree + 1);
+        var result = new Polynomial(poly1.Degree + poly2.Degree + 1);
 
         for (int i = 0; i <= poly1.Degree; i++)
         {

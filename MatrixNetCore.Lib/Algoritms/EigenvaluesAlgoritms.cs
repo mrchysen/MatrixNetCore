@@ -1,9 +1,7 @@
-﻿using LinearMath.Matrix;
-using LinearMath.Vectors;
-using System.Numerics;
-using Mathematics;
+﻿using System.Numerics;
+using MatrixNetCore.Lib.Matrixes;
 
-namespace LinearMath.MatrixAlgorithms;
+namespace MatrixNetCore.Lib.Algoritms;
 
 #region Алгоритмы нахождения собственных чисел
 /// <summary>
@@ -18,11 +16,11 @@ public static class PowerMethod
     /// <param name="matrix">Матрица</param>
     /// <param name="Iteration">Количество итераций</param>
     /// <returns></returns>
-    public static (T, Vectors.Vector<T>) GetMaxEigenvalues<T>(Matrix<T> matrix, int iteration = 10) where T : INumber<T>
+    public static (T, Vector<T>) GetMaxEigenvalues<T>(Matrix<T> matrix, int iteration = 10) where T : INumber<T>
     {
         // Берём вектор единиц
-        Vectors.Vector<T> y0 = new Vectors.Vector<T>(matrix.FirstLength);
-        Vectors.Vector<T> y1;
+        Vector<T> y0 = new Vector<T>(matrix.FirstLength);
+        Vector<T> y1;
         T maxEigenvalue = T.Zero;
 
         // Заполнение начального вектора единицами
@@ -62,10 +60,8 @@ public static class PowerMethod
     /// <param name="matrix"></param>
     /// <param name="vector"></param>
     /// <returns></returns>
-    public static Vectors.Vector<T> Iteration<T>(Matrix<T> matrix, Vectors.Vector<T> vector) where T : INumber<T>
-    {
-        return matrix * vector;
-    }
+    public static Vector<T> Iteration<T>(Matrix<T> matrix, Vector<T> vector) where T : INumber<T> 
+        => matrix * vector;
 
     /// <summary>
     /// Находит максимальное собственное число с заданной точностью. 
@@ -74,11 +70,11 @@ public static class PowerMethod
     /// <param name="matrix">Матрица, для которой ищется максимальное собственное число</param>
     /// <param name="Eps">Заданная точность</param>
     /// <returns>int - кол-во итераций; T - само собственное число; Vector - собственный вектор</returns>
-    public static (int, T,  Vectors.Vector<T>) GetMaxEigenvalues<T>(Matrix<T> matrix, double Eps) where T : INumber<T> 
+    public static (int, T,  Vector<T>) GetMaxEigenvalues<T>(Matrix<T> matrix, double Eps) where T : INumber<T> 
     {
         // Задаём начальный вектор. Единичный.
-        Vectors.Vector<T> vec1 = new(matrix.FirstLength);
-        Vectors.Vector<T> vec2 = new(matrix.FirstLength);
+        Vector<T> vec1 = new(matrix.FirstLength);
+        Vector<T> vec2 = new(matrix.FirstLength);
         for (int i = 0; i < matrix.FirstLength; i++) vec1[i] = T.One;
         for (int i = 0; i < matrix.FirstLength; i++) vec2[i] = T.One;
         T MaxEigenValue1 = T.Zero;
@@ -131,9 +127,9 @@ public static class JacobiEigenvalueAlgorithm
 
             (i, j) = GetMaxAbsPositionElementOfMatrix(eigenMatrix);
             
-            T P = ((T.One + T.One) * eigenMatrix[i,j]) / (eigenMatrix[i, i] - eigenMatrix[j, j]);
+            T P = (T.One + T.One) * eigenMatrix[i,j] / (eigenMatrix[i, i] - eigenMatrix[j, j]);
             
-            double fi = (0.5d) * Math.Atan(Convert.ToDouble(P));
+            double fi = 0.5d * Math.Atan(Convert.ToDouble(P));
 
             Qk = MatrixGenerator.GetRotationMatrix<T>(i, j, eigenMatrix.FirstLength, fi);
             eigenMatrix = MatrixOperations.TransposeMatrix(Qk) * eigenMatrix * Qk;

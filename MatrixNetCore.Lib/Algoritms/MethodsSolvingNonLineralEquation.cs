@@ -1,4 +1,4 @@
-﻿namespace Mathematics.NonLineral;
+﻿namespace MatrixNetCore.Lib.Algoritms;
 
 /// <summary>
 /// Метод секущих
@@ -23,7 +23,7 @@ public static class SecantMethod
         {
             x0 = x1;
             x1 = x2;
-            x2 = x1 - ((x0 - x1) / (Function(x0) - Function(x1))) * Function(x1); 
+            x2 = x1 - (x0 - x1) / (Function(x0) - Function(x1)) * Function(x1); 
 
             iteration++;
         }

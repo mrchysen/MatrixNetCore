@@ -1,5 +1,5 @@
-﻿using LinearMath.Matrix;
-using LinearMath.Vectors;
+﻿using MatrixNetCore.Lib;
+using MatrixNetCore.Lib.Matrixes;
 using System.Numerics;
 
 namespace LinearMath.MatrixAlgorithms;
@@ -18,9 +18,9 @@ public abstract class IterationSolutionAlgorithms
     /// <param name="b"></param>
     /// <param name="k"></param>
     /// <returns></returns>
-    public abstract Vectors.Vector<T> GetSolve<T>(Matrix<T> A, Vectors.Vector<T> b, int k) where T : INumber<T>;
+    public abstract MatrixNetCore.Lib.Vector<T> GetSolve<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, int k) where T : INumber<T>;
 
-    public abstract Vectors.Vector<T> Iteration<T>(Matrix<T> A, Vectors.Vector<T> b, Vectors.Vector<T> x) where T : INumber<T>;
+    public abstract MatrixNetCore.Lib.Vector<T> Iteration<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, MatrixNetCore.Lib.Vector<T> x) where T : INumber<T>;
 }
 
 /// <summary>
@@ -36,9 +36,9 @@ public class JacobiMethod : IterationSolutionAlgorithms
     /// <param name="b"></param>
     /// <param name="k"></param>
     /// <returns></returns>
-    public override Vectors.Vector<T> GetSolve<T>(Matrix<T> A, Vectors.Vector<T> b, int k)
+    public override MatrixNetCore.Lib.Vector<T> GetSolve<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, int k)
     {
-        Vectors.Vector<T> resultVector = new Vectors.Vector<T>(b.Length); // Изначально нулевой вектор
+        var resultVector = new MatrixNetCore.Lib.Vector<T>(b.Length); // Изначально нулевой вектор
 
 
         while (k > 0)
@@ -59,9 +59,9 @@ public class JacobiMethod : IterationSolutionAlgorithms
     /// <param name="b"></param>
     /// <param name="x"></param>
     /// <returns></returns>
-    public override Vectors.Vector<T> Iteration<T>(Matrix<T> A, Vectors.Vector<T> b, Vectors.Vector<T> x)
+    public override MatrixNetCore.Lib.Vector<T> Iteration<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, MatrixNetCore.Lib.Vector<T> x)
     {
-        Vectors.Vector<T> resultVector = new Vectors.Vector<T>(b.Length);
+        var resultVector = new MatrixNetCore.Lib.Vector<T>(b.Length);
 
         for (int i = 0; i < b.Length; i++)
         {
@@ -91,9 +91,9 @@ public class JacobiMethod : IterationSolutionAlgorithms
 /// </summary>
 public class MethodOfGradientDescent : IterationSolutionAlgorithms
 {
-    public override Vectors.Vector<T> GetSolve<T>(Matrix<T> A, Vectors.Vector<T> b, int k)
+    public override MatrixNetCore.Lib.Vector<T> GetSolve<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, int k)
     {
-        Vectors.Vector<T> resultVector = new Vectors.Vector<T>(b.Length);
+        MatrixNetCore.Lib.Vector <T> resultVector = new MatrixNetCore.Lib.Vector<T>(b.Length);
 
         while (k > 0)
         {
@@ -105,10 +105,10 @@ public class MethodOfGradientDescent : IterationSolutionAlgorithms
         return resultVector;
     }
 
-    public override Vectors.Vector<T> Iteration<T>(Matrix<T> A, Vectors.Vector<T> b, Vectors.Vector<T> x)
+    public override MatrixNetCore.Lib.Vector<T> Iteration<T>(Matrix<T> A, MatrixNetCore.Lib.Vector<T> b, MatrixNetCore.Lib.Vector<T> x)
     {
-        Vectors.Vector<T> resultVector = new Vectors.Vector<T>(b.Length);
-        Vectors.Vector<T> r;
+        var resultVector = new MatrixNetCore.Lib.Vector<T>(b.Length);
+        MatrixNetCore.Lib.Vector <T> r;
         T tau;
 
         r = A * x - b;

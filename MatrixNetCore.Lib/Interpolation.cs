@@ -1,9 +1,7 @@
-﻿using LinearMath.Matrix;
-using LinearMath.MatrixAlgorithms;
-using LinearMath.Vectors;
-using Mathematics.Polynomials;
+﻿using MatrixNetCore.Lib.Algoritms.SolvingMatrix;
+using MatrixNetCore.Lib.Matrixes;
 
-namespace Mathematics.Interpolation;
+namespace MatrixNetCore.Lib;
 
 /// <summary>
 /// Нарезчик
@@ -58,7 +56,7 @@ public class Segmentator
 
         for (int i = 0; i < arguments.Length; i++)
         {
-            poly += (funcValues[i] / GetLagrangeNumerator(i, arguments)) * GetPolynomial(i, arguments);
+            poly += funcValues[i] / GetLagrangeNumerator(i, arguments) * GetPolynomial(i, arguments);
         }
 
         Console.WriteLine(poly);
@@ -147,7 +145,7 @@ public class Segmentator
         {
             vecD[i] = (vecC[i+1] - vecC[i]) / (3 * vecH[i]);
         }
-        vecD[N - 2] = (-1) * (vecC[N - 2]/ (3 * vecH[N-2]));
+        vecD[N - 2] = -1 * (vecC[N - 2]/ (3 * vecH[N-2]));
         Console.WriteLine("Вектор d");
         MatrixPrinter.Print(vecD);
         // Вектор b

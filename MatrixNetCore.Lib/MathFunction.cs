@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Mathematics;
+namespace MatrixNetCore.Lib;
 
 public static class StaticFunc
 {
@@ -25,5 +25,5 @@ public static class StaticFunc
     /// <typeparam name="T"></typeparam>
     /// <param name="argument"></param>
     /// <returns></returns>
-    public static T Abs<T>(T argument) where T : INumber<T> => (argument > T.Zero) ? (argument) : (-argument);
+    public static T Abs<T>(T argument) where T : INumber<T> => argument > T.Zero ? argument : -argument;
 }

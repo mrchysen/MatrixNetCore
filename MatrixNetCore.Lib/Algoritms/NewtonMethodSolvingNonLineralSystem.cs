@@ -1,8 +1,7 @@
-﻿using LinearMath.Matrix;
-using LinearMath.MatrixAlgorithms;
-using LinearMath.Vectors;
+﻿using MatrixNetCore.Lib.Algoritms.SolvingMatrix;
+using MatrixNetCore.Lib.Matrixes;
 
-namespace Mathematics.NonLineral;
+namespace MatrixNetCore.Lib.Algoritms;
 
 /// <summary>
 /// Метод Ньютона для решения систем не линейных уравнений.
@@ -27,7 +26,7 @@ public static class NewtonMethod
             x0 = x1;
             Vector<double> delta;
 
-            (_, delta) = new MethodVrashenii().SolveMatrix(GetMatrix(x0, matrix), (-1) * GetVector(x0, vect));
+            (_, delta) = new MethodVrashenii().SolveMatrix(GetMatrix(x0, matrix), -1 * GetVector(x0, vect));
 
             x1 = delta + x0;
         }
